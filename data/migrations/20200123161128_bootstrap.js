@@ -25,7 +25,7 @@ exports.up = function(knex) {
         .references("id")
         .inTable("ingredients");
       tbl.float("qty").notNullable();
-      tbl.float("units").notNullable();
+      tbl.string("units").notNullable();
       tbl.unique(["recipe_id", "ingredient_id"]);
     });
 };
