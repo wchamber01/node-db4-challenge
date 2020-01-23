@@ -1,13 +1,23 @@
-
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('table_name').del()
-    .then(function () {
+  return knex("recipe_ingredients")
+    .truncate()
+    .then(() => knex("ingredients").truncate())
+    .then(() => knex("recipes").truncate())
+    .then(() => {
       // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
+      return knex("recipes").insert([
+        {
+          id: 1,
+          name: "Cheesy Grits",
+          description: "creamy grits with cheese"
+        },
+        { id: 2, name: "Deviled Eggs", description: "delightfully easy" },
+        {
+          id: 3,
+          name: "Rosemary Brown Sugar Bacon",
+          description: "need I say more?"
+        }
       ]);
     });
 };
