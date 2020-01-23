@@ -6,10 +6,9 @@ exports.up = function(knex) {
       tbl.string("description");
       tbl.string("instructions").notNullable();
     })
-    .crteateTable("ingredients", tbl => {
+    .createTable("ingredients", tbl => {
       tbl.increments();
-      tbl.string("name").notNullable;
-      tbl.float("qty").notNullable;
+      tbl.string("name").notNullable();
     })
     .createTable("recipe_ingredients", tbl => {
       tbl.increments();
@@ -17,15 +16,23 @@ exports.up = function(knex) {
         .integer("recipe_id")
         .unsigned()
         .notNullable()
-        .reference("id")
+        .references("id")
         .inTable("recipes");
       tbl
         .integer("ingredient_id")
         .unsigned()
         .notNullable()
-        .reference("id")
+        .references("id")
         .inTable("ingredients");
+      tbl.float("qty").notNullable();
+      tbl.float("units").notNullable();
+      tbl.unique(["recipe_id", "ingredient_id"]);
     });
 };
 
-exports.down = function(knex) {};
+exports.down = function(knex) {
+  return knex.schema
+    .dropTableIfExists("recipe_ingredients")
+    .dropTableIfExists("ingredients")
+    .dropTableIfExists("recipes");
+};
