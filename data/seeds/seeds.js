@@ -19,5 +19,62 @@ exports.seed = function(knex) {
           description: "need I say more?"
         }
       ]);
+    })
+    .then(() => {
+      return knex("ingredients").insert([
+        {
+          id: 1,
+          name: "grits"
+        },
+        { id: 2, name: "cheddar cheese" },
+        {
+          id: 3,
+          name: "cream/milk"
+        },
+        {
+          id: 4,
+          name: "butter"
+        },
+        {
+          id: 5,
+          name: "water"
+        },
+        {
+          id: 6,
+          name: "eggs"
+        },
+        {
+          id: 7,
+          name: "mayonaise"
+        },
+        {
+          id: 8,
+          name: "dill"
+        },
+        {
+          id: 9,
+          name: "mustard"
+        },
+        {
+          id: 10,
+          name: "rosemary"
+        },
+        {
+          id: 11,
+          name: "bacon"
+        },
+        {
+          id: 12,
+          name: "brown sugar"
+        },
+        {
+          id: 13,
+          name: "salt"
+        },
+        {
+          id: 14,
+          name: "pepper"
+        }
+      ]);
     });
 };
