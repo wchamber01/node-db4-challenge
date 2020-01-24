@@ -10,6 +10,7 @@ router.get("/", (req, res) => {
       res.json(recipes);
     })
     .catch(err => {
+      console.log(err);
       res.status(500).json({ message: "Failed to get recipes" });
     });
 });
@@ -28,6 +29,7 @@ router.get("/:id", (req, res) => {
       }
     })
     .catch(err => {
+      console.log(err);
       res.status(500).json({ message: "Failed to get recipe" });
     });
 });
@@ -35,7 +37,7 @@ router.get("/:id", (req, res) => {
 router.get("/:id/ingredients", (req, res) => {
   const { id } = req.params;
 
-  Schemes.findSteps(id)
+  Recipes.getShoppingList(id)
     .then(steps => {
       if (steps.length) {
         res.json(steps);
@@ -46,6 +48,7 @@ router.get("/:id/ingredients", (req, res) => {
       }
     })
     .catch(err => {
+      console.log(err);
       res.status(500).json({ message: "Failed to get ingredients" });
     });
 });
@@ -62,6 +65,7 @@ router.get("/:id/instructions", (req, res) => {
       }
     })
     .catch(err => {
+      console.log(err);
       res.status(500).json({ message: "Failed to get instructions" });
     });
 });

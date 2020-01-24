@@ -20,11 +20,17 @@ function getRecipeById(id) {
     .first();
 }
 
-function getShoppingList(recipe_id) {
-  return db("ingredients")
-    .where({ recipe_id })
-    .first();
+function getShoppingList(id) {
+  return db("recipe_ingredients as ri")
+    .join("ingredients as i", "i.id", "ri.ingredient_id")
+    .select("i.name", "ri.qty", "ri.units")
+    .where({ "ri.recipe_id": id });
 }
+
+// select ingredients.name, recipe_ingredients.ingredient_id, recipe_ingredients.qty, recipe_ingredients.units
+// from recipe_ingredients
+// join ingredients on ingredients.id = recipe_ingredients.ingredient_id
+// where recipe_id = 3
 
 function getInstructions(id) {
   return db("recipes")
